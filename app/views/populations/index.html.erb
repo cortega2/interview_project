@@ -1,10 +1,15 @@
 <h1>Get your population numbers here</h1>
 <form method="get">
-  <input name="year" />
+  <input name="year" id="year-form"/>
   <button type="submit">Submit</button>
 
-  <% if @year %>
-    <h3>You requested the population for: <%= sanitize year %></h3>
-    <h3>Population: <%= population %></h3>
-  <% end %>
+  <div id="radios" style="display:none">
+    <input type="radio" name="model" value="exponential">Exponential</input>
+    <input type="radio" name="model" value="logistic" checked>Logistic</input>
+  </div>
 </form>
+
+<% if @year %>
+  <h3>You requested the population for: <%= sanitize year %></h3>
+  <h3>Population: <%= population %></h3>
+<% end %>
