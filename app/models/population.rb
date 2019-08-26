@@ -17,15 +17,29 @@ class Population < ApplicationRecord
       year = Population.max_year
     end
 
+    p1 = Population.get_closest(:-, year)   # lo
+    p2 = Population.get_closest(:+, year)   # hi
+
+    delta = 0
+    if p2[:year] != p1[:year]
+      delta = (p2[:population] - p1[:population]) / (p2[:year] - p1[:year])
+    end
+
+    pop = p1[:population] + delta * (year - p1[:year])
+  end
+
+  private
+  def self.get_closest(op, year)
     pop = nil
     until pop
       pop = Population.find_by_year(Date.new(year))
-      year = year - 1
+
+      if !pop
+        year = year.send(op, 1)
+      end
     end
 
-    return pop.population if pop
-
-    nil
+    return {year: year, population: pop.population}
   end
 
 end
