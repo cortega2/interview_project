@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Queries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Answer</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @queries.each do |query| %>
+      <tr>
+        <td><%= query.year %></td>
+        <td><%= query.answer %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

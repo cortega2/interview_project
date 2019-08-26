@@ -1,9 +1,11 @@
 class PopulationsController < ApplicationController
   before_action :check_year
   def index
-
     if @year
       @population = Population.get(@year)
+
+      # record
+      Query.create( {year: @year, answer: @population} )
     end
   end
 
