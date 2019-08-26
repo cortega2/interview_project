@@ -21,6 +21,23 @@
       </tr>
     <% end %>
   </tbody>
+  
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Count</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @counts.each do |key, count| %>
+      <tr>
+        <td><%= key %></td>
+        <td><%= count %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <br>

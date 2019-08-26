@@ -5,10 +5,11 @@ class PopulationsController < ApplicationController
       @population = Population.get(@year)
 
       # record
-      if Population.find_by_year(Date.new(@year.to_i))
-        Query.create( {year: @year, answer: @population, category: "exact"} )
+      date = Date.new(@year.to_i)
+      if Population.find_by_year(date)
+        Query.create( {year: date, answer: @population, category: "exact"} )
       else
-        Query.create( {year: @year, answer: @population, category: "calculated"} )
+        Query.create( {year: date, answer: @population, category: "calculated"} )
       end
     end
   end
