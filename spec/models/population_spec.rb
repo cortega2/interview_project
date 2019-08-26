@@ -27,9 +27,8 @@ RSpec.describe Population, type: :model do
       expect(Population.get(-1000)).to eq(0)
     end
 
-    it "should accept a year that is after latest known and return the last known population" do
-      expect(Population.get(2000)).to eq(248709873)
-      expect(Population.get(200000)).to eq(248709873)
+    it "should accept a year that is after latest known and return an aproximation based on exp growth" do
+      expect(Population.get(2000)).to eq(611727577)
     end
   end
 end

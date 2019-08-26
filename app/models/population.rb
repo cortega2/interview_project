@@ -12,10 +12,7 @@ class Population < ApplicationRecord
     year = year.to_i
 
     return 0 if year < min_year
-
-    if year > Population.max_year
-      year = Population.max_year
-    end
+    return Population.expo_growth(year) if year > Population.max_year
 
     p1 = Population.get_closest(:-, year)   # lo
     p2 = Population.get_closest(:+, year)   # hi
@@ -40,6 +37,14 @@ class Population < ApplicationRecord
     end
 
     return {year: year, population: pop.population}
+  end
+
+  def self.expo_growth(year)
+    # f(x) = (pop @ max_year) * e^((0.09) * year - max_year)
+    rate = 0.09
+    y0 = Population.max_year
+    p0 = Population.find_by_year(Date.new(y0)).population
+    return (p0 * Math.exp(rate * (year - y0))).floor
   end
 
 end

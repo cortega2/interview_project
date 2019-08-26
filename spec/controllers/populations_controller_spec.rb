@@ -20,5 +20,11 @@ RSpec.describe PopulationsController, type: :controller do
       expect(response.content_type).to eq "text/html"
       expect(response.body).to match /Population: #{Population.get(year)}/im
     end
+
+    it "returns 422 error if year is greater than 2500" do
+      year = 2501
+      get :index, params: { year: year }
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
   end
 end
